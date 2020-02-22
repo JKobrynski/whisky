@@ -106,6 +106,7 @@ body {
   padding-bottom: $padding * 4;
 
   .card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,7 +115,7 @@ body {
     background-color: $color;
     box-shadow: $up-shadow;
     border-radius: $border-radius;
-    transition: all 1s;
+    transition: all 0.5s ease-in-out;
     transition-duration: 1s;
     padding: 2em;
     max-width: 550px;
@@ -177,6 +178,21 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: visible;
+    opacity: 0;
+  }
+  100% {
+    display: visible;
+    opacity: 1;
+  }
+}
+
 .modal {
   position: fixed;
   top: 50vh;
@@ -184,13 +200,29 @@ body {
   padding: 1em;
   transform: translate(-50%, -50%);
   margin: 0;
-  width: 30vw;
+  width: 40%;
   background: $color;
   box-shadow: $up-shadow;
   border-radius: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-out;
+  max-height: 100vw;
+  overflow: auto;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 850px) {
+    width: 60%;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: 90%;
+  }
 
   h1 {
     text-align: center;
@@ -241,8 +273,24 @@ body {
       padding-bottom: 0.75em;
       text-decoration: none;
       font-size: 1rem;
+
+      &:active {
+        box-shadow: $down-shadow;
+      }
     }
   }
+}
+
+.display-none {
+  display: none;
+}
+
+.display-visible {
+  display: visible;
+}
+
+.blur {
+  filter: blur(2.5px);
 }
 
 .spinner {
