@@ -10,16 +10,20 @@ function App() {
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(false);
 
+  const ownClassName = visible ? "blur" : "";
+
   return (
     <Provider store={store}>
-      <Navbar
-        search={search}
-        setSearch={setSearch}
-        visible={visible}
-        setVisible={setVisible}
-      />
-      <Content search={search} visible={visible} setVisible={setVisible} />
-      {visible && <Modal />}
+      <main className={ownClassName}>
+        <Navbar
+          search={search}
+          setSearch={setSearch}
+          visible={visible}
+          setVisible={setVisible}
+        />
+        <Content search={search} visible={visible} setVisible={setVisible} />
+      </main>
+      <Modal visible={visible} setVisible={setVisible} />
     </Provider>
   );
 }

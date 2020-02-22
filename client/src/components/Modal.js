@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../store/actions";
 
-export default function Modal() {
+export default function Modal({ visible, setVisible }) {
   const [whisky, setWhisky] = useState({
     name: "",
     age: "",
@@ -21,6 +21,7 @@ export default function Modal() {
 
   const _onSubmit = () => {
     dispatch(addItem(whisky));
+    setVisible(false);
   };
 
   const _isEmpty = () => {
@@ -29,8 +30,12 @@ export default function Modal() {
     return !name || !age || !country || !description;
   };
 
+  const showHideClassName = visible
+    ? "modal display-visible"
+    : "modal display-none";
+
   return (
-    <div className="modal">
+    <div className={showHideClassName}>
       <h1>Add a new one</h1>
       <form onSubmit={_onSubmit}>
         <label>Name</label>
