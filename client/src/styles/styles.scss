@@ -1,0 +1,283 @@
+$padding: 2rem;
+$color: #e0e5ec;
+$border-radius: 16px;
+$up-shadow: 5px 5px 10px #bec3c9, -5px -5px 10px #ffffff;
+$down-shadow: inset 5px 5px 10px #bec3c9, inset -5px -5px 10px #ffffff;
+
+%no-margins {
+  margin: 0;
+  padding: 0;
+}
+
+%no-border-outline {
+  border: none;
+  outline: none;
+}
+
+body,
+html {
+  height: 100%;
+  font-family: "Montserrat";
+}
+
+body {
+  padding: $padding;
+  background-color: $color;
+  position: relative;
+
+  .header {
+    @extend %no-margins;
+    display: flex;
+    flex-direction: row;
+    align-items: "center";
+    justify-content: space-between;
+    margin-bottom: 4rem;
+
+    @media only screen and (max-width: 1050px) {
+      flex-direction: column;
+
+      .end {
+        margin-top: 1em;
+      }
+    }
+
+    .header-title {
+      @extend %no-margins;
+      font-size: 3rem;
+    }
+
+    .add-button {
+      @extend %no-border-outline;
+      margin-right: 1em;
+      width: 4.6em;
+      height: 4.6em;
+      border-radius: 4em;
+      justify-self: flex-end;
+      padding: none;
+      margin: none;
+      box-shadow: $up-shadow;
+      background: $color;
+      transition-duration: 0.4s;
+      background: url("../assets/add_icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
+
+      &:active {
+        box-shadow: $down-shadow;
+      }
+    }
+
+    input[type="text"] {
+      @extend %no-border-outline;
+      padding: 0;
+      width: 4em;
+      height: 4em;
+      margin: auto 0;
+      border-radius: 4em;
+      box-shadow: $down-shadow;
+      background: $color;
+      background-image: url("../assets/search-icon.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 0.3em;
+      transition: width 0.4s ease-in-out, border-radius 0.4s linear;
+      cursor: pointer;
+      font-family: "Montserrat";
+
+      &:hover {
+        width: 20em;
+        background-image: none;
+        padding: 0 1.5em;
+      }
+
+      &:focus {
+        width: 20em;
+        background-image: none;
+        padding: 0 1.5em;
+      }
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: $padding;
+  padding-bottom: $padding * 4;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    background-color: $color;
+    box-shadow: $up-shadow;
+    border-radius: $border-radius;
+    transition: all 1s;
+    transition-duration: 1s;
+    padding: 2em;
+    max-width: 550px;
+
+    &:hover {
+      box-shadow: $down-shadow;
+      transform: translateY(-1em);
+
+      .delete-button {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .delete-button {
+      @extend %no-border-outline;
+      visibility: hidden;
+      opacity: 0;
+      text-decoration: none;
+      background-color: $color;
+      box-shadow: $up-shadow;
+      border-radius: 9999;
+      width: 60%;
+      padding-top: 0.6em;
+      padding-bottom: 0.6em;
+      border-radius: 4em;
+      font-size: 1rem;
+      margin-top: auto;
+      transition: visibility 0.3s linear, opacity 0.3s linear;
+
+      &:hover {
+        box-shadow: $down-shadow;
+      }
+    }
+
+    .name {
+      @extend %no-margins;
+      font-family: "URW Chancery L";
+      font-style: italic;
+      font-size: 2rem;
+      margin-bottom: 0.5em;
+    }
+
+    .age {
+      @extend %no-margins;
+      font-size: 2.5rem;
+      margin-bottom: 0.5em;
+    }
+
+    .country {
+      @extend %no-margins;
+      margin-bottom: 0.5em;
+    }
+
+    .description {
+      padding: 0;
+      margin: auto;
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  padding: 1em;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  width: 30vw;
+  background: $color;
+  box-shadow: $up-shadow;
+  border-radius: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    padding-bottom: 2em;
+
+    label {
+      margin-bottom: 0.5em;
+    }
+
+    input[type="text"] {
+      @extend %no-border-outline;
+      margin-bottom: 1.5em;
+      box-shadow: $down-shadow;
+      border-radius: 4em;
+      background: $color;
+      padding: 0.75em 1em;
+      font-size: 0.9em;
+    }
+
+    textarea {
+      @extend %no-border-outline;
+      resize: none;
+      border-radius: 1em;
+      box-shadow: $down-shadow;
+      background: $color;
+      padding: 0.75em 1em;
+      margin-bottom: 4em;
+      font-size: 0.9em;
+      height: 6em;
+    }
+
+    input[type="submit"] {
+      @extend %no-border-outline;
+      border-radius: 4em;
+      background: $color;
+      box-shadow: $up-shadow;
+      margin-top: auto;
+      width: 80%;
+      align-self: center;
+      padding-top: 0.75em;
+      padding-bottom: 0.75em;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+  }
+}
+
+.spinner {
+  width: 4em;
+  height: 4em;
+  background-color: #000;
+
+  margin: 2em auto;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% {
+    -webkit-transform: perspective(120px);
+  }
+  50% {
+    -webkit-transform: perspective(120px) rotateY(180deg);
+  }
+  100% {
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+  }
+}
+
+@keyframes sk-rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
